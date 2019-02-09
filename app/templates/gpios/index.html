@@ -1,0 +1,9 @@
+{% if gpio_pin_settings %}
+    <ul>
+    {% for gpio_setting in gpio_pin_settings %}
+        <li><a href="/app/{{ gpio_setting.GPIO_Pin }}/">GPIO Pin: {{gpio_setting.GPIO_Pin}}  Toggled On: {{ gpio_setting.toggle_on }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No settings found for GPIO pins. Add through admin page.</p>
+{% endif %}
