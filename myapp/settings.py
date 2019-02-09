@@ -26,12 +26,13 @@ SECRET_KEY = 's2@urfff&258*ja36&yl4@v$llvk=#6sosui#!lqodyy$+yp+*'
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['192.168.1.16']
+ALLOWED_HOSTS = ['192.168.1.16','localhost']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'app.apps.AppConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
