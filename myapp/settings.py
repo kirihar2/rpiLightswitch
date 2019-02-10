@@ -26,7 +26,7 @@ SECRET_KEY = 's2@urfff&258*ja36&yl4@v$llvk=#6sosui#!lqodyy$+yp+*'
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['192.168.1.16','localhost']
+ALLOWED_HOSTS = ['192.168.1.16','localhost','jurankirihara.local']
 
 
 # Application definition
