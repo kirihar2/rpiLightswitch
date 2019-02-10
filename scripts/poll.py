@@ -29,7 +29,7 @@ def cls():
 # THREE = 25
 GPIO.cleanup()
 # #sets the mode for the pin out
-GPIO.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BOARD)
 
 # #defines if the pins are inputs or out puts
 # GPIO.setup(ONE, GPIO.OUT)
