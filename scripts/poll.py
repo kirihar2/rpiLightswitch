@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 #Licensed under the MIT licence 
 #To end the Programme use "C+Ctrl" at the same time. 
@@ -6,15 +5,15 @@
 #pretty obvious, but you'll want these dependencies to be installed for this script to work
 
 # This imports the Raspberry Pi's GPIO library but as GPIO so we don't need to be repeating it.
-# import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 
+import json
+import os
 #This is used to sleep the code a the end.
 import time
 import json
 #Requests is the ONE that is need to be installed with "sudo apt-get install python-requests" this lets us to grab and interpret PHP
 import requests
-
-import os
 
 def cls():
     os.system(['clear','cls'][os.name == 'nt'])
@@ -36,7 +35,11 @@ def cls():
 # GPIO.setup(ONE, GPIO.OUT)
 # GPIO.setup(TWO, GPIO.OUT)
 # GPIO.setup(THREE, GPIO.OUT)
-
+available_pin_mapping = {}
+available_pin_mapping["4"] = 7
+available_pin_mapping["27"] = 13
+# for gpio_pin in available_pin_mapping: 
+#     GPIO.setup(available_pin_mapping[gpio_pin],GPIO.OUT)
 
 # #replace the http://YourWebsite.com/test.php with where your test.php is located.
 response = requests.get('http://localhost:8000/app/api/')
@@ -44,23 +47,19 @@ response = requests.get('http://localhost:8000/app/api/')
 #replace the http://YourWebsite.com/test.php with where your test.php is located.
 while response.text != 'exit':
     response = requests.get('http://localhost:8000/app/api/')
-
-#This says ONE is the first digit TWO is the second and THREE is the last 
-    colrs = response.text
-    one = colrs[0]
-    two = colrs[1]
-    three = colrs[2]
+    if response.status_code != 200: 
+        time.sleep(5)
+        continue
+    content = json.loads(response.content)
+    print(content)
+    for gpio_setting in content: 
+        pin_number = content[gpio_setting]["GPIO_Pin"]
+        toggle_on = content[gpio_setting]["toggle_on"]
+        if pin_number in available_pin_mapping: 
+            GPIO.output(available_pin_mapping[pin_number],toggle_on)
+    #This says ONE is the first digit TWO is the second and THREE is the last 
 
     cls()
-
-    if response.text == 'exit':
-        print (colrs)
-    else:
-        print ("one" + one + ", "),
-        print ("two" + two + ", "),
-        print ("three" + three)
-        print
-
 
 
 #This can be removed but this time is to stop the web server from being overloaded with requests.
