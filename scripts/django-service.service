@@ -5,8 +5,6 @@ Description=Django Webservice for GPIO Control
 Type=simple
 ExecStart=/usr/bin/python3 /home/pi/Desktop/myapp/manage.py runserver 0:8000
 WorkingDirectory=/home/pi/Desktop/myapp/
-Restart=always
-RestartSec=2
 
 [Install]
 WantedBy=sysinit.target
