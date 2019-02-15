@@ -37,6 +37,7 @@ GPIO.setmode(GPIO.BOARD)
 # GPIO.setup(THREE, GPIO.OUT)
 available_pin_mapping = {}
 available_pin_mapping["4"] = 7
+available_pin_mapping["6"] = 31
 available_pin_mapping["0"] = 11
 for gpio_pin in available_pin_mapping: 
     GPIO.setup(available_pin_mapping[gpio_pin],GPIO.OUT)
