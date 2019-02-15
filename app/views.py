@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.http import JsonResponse
+from django.shortcuts import get_object_or_404,render,redirect
+from django.http import HttpResponse, HttpResponseRedirect,JsonResponse
 from .models import GPIO
 from django.shortcuts import render
 from django.http import Http404
+from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
 
 def detail_json(request, GPIO_Pin):
     try:
@@ -41,3 +42,16 @@ def index(request):
         'gpio_pin_settings': gpio_pins,
     }
     return render(request, 'gpios/index.html', context)
+@csrf_exempt
+def toggle(request,GPIO_Pin):
+    if request.method == 'POST':
+        if request.is_ajax():
+            print("is ajax")
+            gpio = get_object_or_404(GPIO,GPIO_Pin=GPIO_Pin)
+            print(gpio.toggle_on,not gpio.toggle_on)
+            gpio.toggle_on = not gpio.toggle_on
+            gpio.save()
+            print("changed toggle to ",end='')
+            print(gpio.toggle_on)
+    
+    return  HttpResponse("success")

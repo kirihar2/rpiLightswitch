@@ -1,5 +1,10 @@
-<h1>{{ gpio.GPIO_Pin }}</h1>
-<ul>
-<li>Pin Value: {{gpio.toggle_on}}</li>
-<li>Timestamp: {{gpio.pub_date}}</li>
-</ul>
+<h1>GPIO {{ gpio.GPIO_Pin }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<body>
+    <div style="display: block">
+        <label>Toggled on:  {{gpio.toggle_on}}</label>
+        <label>Last Updated:  {{gpio.pub_date}}</label>
+    </div>
+
+</body>
