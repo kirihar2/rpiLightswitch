@@ -47,7 +47,7 @@ def toggle(request,GPIO_Pin):
     if request.method == 'POST':
         if request.is_ajax():
             print("is ajax")
-            gpio = get_object_or_404(GPIO,GPIO_Pin=GPIO_Pin)
+            gpio = GPIO.objects.filter(GPIO_Pin=GPIO_Pin)[0]
             print(gpio.toggle_on,not gpio.toggle_on)
             gpio.toggle_on = not gpio.toggle_on
             gpio.save()
