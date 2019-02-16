@@ -54,4 +54,4 @@ def toggle(request,GPIO_Pin):
             print("changed toggle to ",end='')
             print(gpio.toggle_on)
     
-    return  HttpResponse("success")
+    return  HttpResponse()

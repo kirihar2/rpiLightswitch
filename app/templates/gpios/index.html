@@ -106,7 +106,7 @@ input:checked + .slider:before {
             type: 'POST',
             url: ''+gpio_pin+'/toggle/',
             success: function (data, textStatus) {
-                alert(data, textStatus);
+                console.log("success");
             },
             error: function(xhr, status, e) {
                 alert(status, e);
